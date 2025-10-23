@@ -25,6 +25,7 @@ body{
     width: 100%;
     text-align: center;
     padding: 0.1rem;
+    overflow : hidden ;
 }
 
 #app {
@@ -258,4 +259,5 @@ h6 {
             to{
                 translate : var(--translateX) calc(var(--translateY) * -1);
             }
+
         }
