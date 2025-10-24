@@ -209,78 +209,87 @@ h6 {
     padding: 0.5rem 0.9rem;
 }
 
-.loader-wrapper{
-        background-color: #000000;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        color: #fff;
-        min-height: 100vh;
-        min-width: 100vw;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        perspective: 24em;
-        z-index: 1;
 
-        *{
-            transform-style: preserve-3d;
-        }
 
+.loader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #000010 0%, #000 100%);
 }
 
-.scene{
-    position: relative;
-    top: 0px;
-    *{position: absolute;}
+/* ⚡ Futuristic animated gradient layer */
+.futuristic-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 180deg, #00fff7, #0055ff, #ff00ff, #00fff7);
+  animation: rotateGradient 10s linear infinite;
+  opacity: 0.15;
+  filter: blur(120px);
+}
+@keyframes rotateGradient {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-.bigDots{
-    animation : rotate 32s linear infinite reverse;
-        i {
-            inset : -2.5rem; 
-            background-image: radial-gradient(circle at top,hsl(calc(var(--f)*75) 100% 29% ),#000000);
-            border-radius: 50%;
-            translate: calc(var(--i) * 6em);
-            box-shadow:0px 0px 59px 17px rgba(255,255,255,0.95);
-            animation : rotate 32s infinite linear;
-        }
+/* 💻 Matrix Canvas */
+#matrixCanvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: transparent;
+  mix-blend-mode: screen;
 }
 
-.dots{
-    --delay: calc(pow(var(--d), 2.5) * -0.005s - var(--d) * 0.05s) ;
-
-    animation-composition : add;
-    animation:
-        rotate 6s var(--delay) infinite linear,
-        rotate 32s infinite linear reverse;
-        i{
-            --n: calc(var(--i) / 7.5 - 1);
-            --translateX : calc(var(--n) * 12em);
-            --translateY : calc(sin((var(--i) + 1) / 17 * 360deg) * 12em);
-
-            inset : calc(var(--d) * -0.05em - 0.2em);
-            background-image: radial-gradient(circle at top,hsl(calc(var(--n)*75) 100% 56% ),#000);
-            border-radius : 50%;
-            box-shadow: 0 0 0.5em #ffffff;
-            animation-composition: add;
-            animation:
-                translate 3s var(--delay) infinite ease-in-out alternate,
-                rotate 6s var(--delay) infinite linear reverse,
-                rotate 32s infinite linear;
-
-        }
+/* 🕳 Cutout text effect */
+.title {
+  font-size: 3rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(90deg, #00fff7, #ff00ff, #00ff90);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: textMove 4s linear infinite, textGlow 2s ease-in-out infinite alternate;
+  z-index: 2;
+  text-align: center;
 }
 
-@keyframes rotate{
-    to{rotate : y -360deg;}
+@keyframes textMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
-@keyframes translate{
-    from{
-        translate : var(--translateX) var(--translateY) ;
-    }
-    to{
-        translate : var(--translateX) calc(var(--translateY) * -1);
-    }
+@keyframes textGlow {
+  0% { filter: drop-shadow(0 0 5px #00fff7); }
+  100% { filter: drop-shadow(0 0 25px #ff00ff); }
+}
+
+/* ✨ Subtitle */
+.subtitle {
+  color: #00fff7;
+  font-size: 1rem;
+  margin-top: 10px;
+  opacity: 0.8;
+  letter-spacing: 2px;
+  z-index: 2;
+}
+
+/* 🌀 Fade out when loaded */
+body.loaded .loader {
+  animation: fadeOut 1.5s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; transform: scale(1.2); visibility: hidden; }
 }
