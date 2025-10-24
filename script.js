@@ -4,7 +4,7 @@ const app = TubesCursor(document.getElementById('canvas'), {
   tubes: {
     colors: ["#f967fb", "#53bc28", "#6958d5"],
     lights: {
-      intensity: 500,
+      intensity: 300,
       colors: ["#83f36e", "#fe8a2e", "#ff008a", "#60aed5" , "#f967fb", "#53bc28"]
     }
   }
@@ -22,4 +22,5 @@ function randomColors (count) {
     return new Array(count)
         .fill(0)
         .map(() => "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0'))
+
 }
