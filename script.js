@@ -1,0 +1,34 @@
+import TubesCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js";
+
+const canvas = document.getElementById('canvas');
+function resizeCanvas(){
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+const app = TubesCursor(canvas, {
+  tubes: {
+    colors: ["#f967fb", "#53bc28", "#6958d5"],
+    lights: {
+      intensity: 500,
+      colors: ["#83f36e", "#fe8a2e", "#ff008a", "#60aed5", "#f967fb", "#53bc28"]
+    }
+  }
+});
+
+document.body.addEventListener('click', () => {
+  const colors = randomColors(3);
+  const lightsColors = randomColors(6);
+  console.log(colors, lightsColors);
+  app.tubes.setColors(colors);
+  app.tubes.setLightsColors(lightsColors);
+});
+
+function randomColors(count){
+  return new Array(count)
+    .fill(null)
+    .map(() => "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0'));
+}
+
